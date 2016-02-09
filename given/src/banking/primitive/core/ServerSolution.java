@@ -71,7 +71,12 @@ class ServerSolution implements AccountServer {
 		
 		if (balance < 0.0f) throw new IllegalArgumentException("New account may not be started with a negative balance");
 		
-		return newAccountFactory(type, name, balance);
+		if (accountMap.get(name) != null)
+		{
+			return false;
+		}
+		else
+			return newAccountFactory(type, name, balance);
 	}
 	
 	public boolean closeAccount(String name) {
